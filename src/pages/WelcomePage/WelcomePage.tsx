@@ -23,13 +23,13 @@ const WelcomePage = memo(() => {
           >
             Войти
           </Button>
-          <Button
-            dimension={Dimension.WIDE}
-            type={ButtonType.SECONDARY}
-            onClick={() => navigate("/registration")}
-          >
-            Зарегистрироваться
-          </Button>
+            <Button
+                dimension={Dimension.WIDE}
+                type={ButtonType.SECONDARY}
+                disabled
+            >
+                Регистрация временно недоступна
+            </Button>
         </Actions>
       </DefaultContent>
     ),

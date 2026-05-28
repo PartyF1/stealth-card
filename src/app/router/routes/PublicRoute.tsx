@@ -1,3 +1,4 @@
+/*
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider/context";
 
@@ -14,3 +15,4 @@ export const PublicRoute = () => {
 
   return <Outlet />;
 };
+*/
