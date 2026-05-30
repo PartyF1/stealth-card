@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { User } from "../../../shared/types/user";
 import { UserContext } from "./context";
-import { UserType } from "../../../shared/types/user";
-
-const demoUser: User = {
-  id: "1",
-  type: UserType.BUSINESS,
-  name: "Demo Company",
-  email: "demo@checkmate.ru",
-  details: {
-    scopeOfActivity: "Розничная торговля",
-    region: "Москва",
-    contacts: "+7 999 999 99 99",
-  },
-};
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(demoUser);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const raw = localStorage.getItem("user");
+    if (raw) {
+      setUser(JSON.parse(raw));
+    }
+  }, []);
+
+  const updateUser = (data: User | null) => {
+    if (data) {
+      localStorage.setItem("user", JSON.stringify(data));
+    } else {
+      localStorage.removeItem("user");
+    }
+    setUser(data);
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser: updateUser }}>
       {children}
     </UserContext.Provider>
   );

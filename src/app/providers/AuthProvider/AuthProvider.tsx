@@ -1,4 +1,3 @@
-/*
 import { useEffect, useState } from "react";
 import { AuthContext } from "./context";
 
@@ -30,4 +29,3 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     </AuthContext.Provider>
   );
 };
-*/

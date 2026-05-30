@@ -1,4 +1,3 @@
-/*
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider/context";
 import { OpenButton } from "../../../components/MainMenu";
@@ -22,4 +21,3 @@ export const ProtectedRoute = () => {
     </>
   );
 };
-*/
