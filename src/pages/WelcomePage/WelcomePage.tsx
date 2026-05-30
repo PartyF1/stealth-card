@@ -1,8 +1,11 @@
 import { memo } from "react";
 import TemplatePage from "../TemplatePage";
-import { DefaultContent } from "../../components/DefaultContent";
+import {
+  ProductAboutContent,
+  ProductDetailsContent,
+} from "../../components/ProductInfoContent";
 import { Button, ButtonType } from "../../shared/ui/Button";
-import { Actions } from "./WelcomePage.styled";
+import { DirectorContact, SideFooter } from "./WelcomePage.styled";
 import { Dimension } from "../../shared/types/enums";
 import { useNavigate } from "react-router-dom";
 
@@ -11,29 +14,24 @@ const WelcomePage = memo(() => {
 
   return (
     <TemplatePage
+      sideContent={{
+        content: <ProductAboutContent />,
+        footer: (
+          <SideFooter>
+            <Button
+              dimension={Dimension.NARROW}
+              type={ButtonType.PRIMARY}
+              onClick={() => navigate("/login")}
+            >
+              Войти
+            </Button>
+            <DirectorContact>Ген. директор: +7 950 166 3763</DirectorContact>
+          </SideFooter>
+        ),
+      }}
       mainContent={{
         header: <></>,
-        content: (
-          <DefaultContent title="ДОБРО ПОЖАЛОВАТЬ В CHECKMATE">
-            <Actions>
-              <Button
-                dimension={Dimension.WIDE}
-                type={ButtonType.PRIMARY}
-                onClick={() => navigate("/login")}
-              >
-                Войти
-              </Button>
-              <Button
-                dimension={Dimension.WIDE}
-                type={ButtonType.SECONDARY}
-                onClick={() => navigate("/registration")}
-              >
-                Зарегистрироваться
-              </Button>
-            </Actions>
-          </DefaultContent>
-        ),
-        footer: <></>,
+        content: <ProductDetailsContent />,
       }}
     />
   );

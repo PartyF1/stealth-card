@@ -13,7 +13,6 @@ const OfferPage = lazy(() => import("../../pages/MainPage/Offer"));
 const ReportPage = lazy(() => import("../../pages/ReportPage"));
 const CreateOfferPage = lazy(() => import("../../pages/CreateOfferPage"));
 const ProfilePage = lazy(() => import("../../pages/ProfilePage"));
-const ProductInfoPage = lazy(() => import("../../pages/ProductInfoPage"));
 
 export const router = createBrowserRouter([
   {
@@ -40,10 +39,6 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
-      },
-      {
-        path: "/info",
-        element: <ProductInfoPage />,
       },
       {
         path: "/create-offer",

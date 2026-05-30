@@ -39,9 +39,6 @@ export const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
             Мои предложения
           </MenuItem>
           <MenuItem onClick={() => navigate("/orders")}>Мои заказы</MenuItem>
-          <MenuItem onClick={() => navigate("/info")}>
-            Информация о продукте
-          </MenuItem>
         </MenuList>
 
         <Footer>
