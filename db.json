@@ -1,6 +1,53 @@
 {
   "users": [],
-  "offers": [],
+  "offers": [
+    {
+      "id": "eb30",
+      "name": "1",
+      "userId": "demo-business-1",
+      "details": {
+        "description": {
+          "title": "Описание",
+          "value": "1"
+        },
+        "conditions": {
+          "title": "Условия",
+          "value": "1"
+        },
+        "location": {
+          "title": "Расположение",
+          "value": "11"
+        },
+        "cost": {
+          "title": "Оплата",
+          "value": "1"
+        }
+      }
+    },
+    {
+      "id": "446a",
+      "name": "1",
+      "userId": "demo-business-1",
+      "details": {
+        "description": {
+          "title": "Описание",
+          "value": "1"
+        },
+        "conditions": {
+          "title": "Условия",
+          "value": "1"
+        },
+        "location": {
+          "title": "Расположение",
+          "value": "11"
+        },
+        "cost": {
+          "title": "Оплата",
+          "value": "1"
+        }
+      }
+    }
+  ],
   "messages": [],
   "chats": [],
   "reports": []
