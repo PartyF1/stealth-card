@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const ScrollableMain = styled.div`
-  max-height: calc(100vh - 135px);
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -20,12 +21,6 @@ export const MockupImage = styled.img`
   width: 100%;
   height: auto;
   display: block;
-`;
-
-export const FoundationLogo = styled.img`
-  display: block;
-  max-width: 300px;
-  margin-top: 8px;
 `;
 
 export const Description = styled.p`

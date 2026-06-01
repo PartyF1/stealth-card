@@ -1,12 +1,10 @@
 import { DefaultContent } from "../DefaultContent";
-import logo from "../../assets/foundation.svg";
 import mockupProfile from "../../assets/product-mockups/mockup-profile.png";
 import mockupChat from "../../assets/product-mockups/mockup-chat.png";
 import mockupReport from "../../assets/product-mockups/mockup-report.png";
 import mockupOffers from "../../assets/product-mockups/mockup-offers.png";
 import {
   Description,
-  FoundationLogo,
   MockupImage,
   MockupsGrid,
   ScrollableMain,
@@ -22,7 +20,7 @@ const PRODUCT_MOCKUPS = [
 export const ProductAboutContent = () => (
   <DefaultContent title="О ПРОДУКТЕ">
     <Description>
-      CHECKMATE — платформа для организации проверок качества обслуживания:
+      STEALTHINSIDE — платформа для организации проверок качества обслуживания:
       бизнес публикует задания, тайные покупатели выполняют визиты и
       формируют структурированные отчёты.
     </Description>
@@ -38,7 +36,6 @@ export const ProductAboutContent = () => (
       федерального проекта "Платформа университетского технологического
       предпринимательства".
     </Description>
-    <FoundationLogo src={logo} alt="Фонд содействия инновациям" />
   </DefaultContent>
 );
 
@@ -46,7 +43,7 @@ export const ProductDetailsContent = () => (
   <ScrollableMain>
     <DefaultContent title="ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ">
       <Description>
-        Клиентская часть CHECKMATE — одностраничное веб-приложение (SPA),
+        Клиентская часть STEALTHINSIDE — одностраничное веб-приложение (SPA),
         собранное на React с TypeScript. Интерфейс построен из компонентного
         дерева React, типизация на уровне TypeScript снижает количество ошибок
         при разработке и сопровождении. Навигация между разделами — предложения,

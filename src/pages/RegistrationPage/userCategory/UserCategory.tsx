@@ -13,7 +13,7 @@ export const UserCategory = (setUserCategory: CallableFunction) => {
     mainContent: {
       header: <></>,
       content: (
-        <DefaultContent title="ДОБРО ПОЖАЛОВАТЬ В CHECKMATE">
+        <DefaultContent title="ДОБРО ПОЖАЛОВАТЬ В STEALTHINSIDE">
           <Actions>
             <Button
               dimension={Dimension.WIDE}
