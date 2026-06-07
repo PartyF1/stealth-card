@@ -21,8 +21,13 @@ interface SideMenuProps {
 
 export const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    setUser(null);
+  };
   return (
     <>
       <Overlay $isOpen={isOpen} onClick={onClose} />
@@ -30,7 +35,7 @@ export const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
       <Drawer $isOpen={isOpen}>
         <MenuHeader>
           <MenuTitle>МЕНЮ</MenuTitle>
-          <Button onClick={logout}>ВЫЙТИ</Button>
+          <Button onClick={handleLogout}>ВЫЙТИ</Button>
         </MenuHeader>
 
         <MenuList>

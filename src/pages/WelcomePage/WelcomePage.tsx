@@ -6,7 +6,10 @@ import {
 import foundationLogo from "../../assets/foundation.svg";
 import { Button, ButtonType } from "../../shared/ui/Button";
 import { Dimension } from "../../shared/types/enums";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../app/providers/AuthProvider/context";
+import { useUser } from "../../app/providers/UserProvider/context";
+import { TEST_BUSINESS_USER } from "../../shared/mocks/testBusinessUser";
+import { resetDemoStore } from "../../shared/mocks/demoStore";
 import {
   ContentRow,
   DirectorContact,
@@ -24,7 +27,14 @@ import {
 } from "./WelcomePage.styled";
 
 const WelcomePage = memo(() => {
-  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { setUser } = useUser();
+
+  const handleTestLogin = () => {
+    resetDemoStore();
+    login(TEST_BUSINESS_USER.token);
+    setUser(TEST_BUSINESS_USER);
+  };
 
   return (
     <PageShell>
@@ -36,7 +46,7 @@ const WelcomePage = memo(() => {
         <Button
           dimension={Dimension.NARROW}
           type={ButtonType.PRIMARY}
-          onClick={() => navigate("/login")}
+          onClick={handleTestLogin}
         >
           Войти
         </Button>
