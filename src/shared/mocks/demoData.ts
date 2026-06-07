@@ -1,16 +1,8 @@
 import { UserType, type User } from "../types/user";
-import { TEST_BUSINESS_USER } from "./testBusinessUser";
+import { TEST_BUSINESS_USER, TEST_SHOPPER_USER } from "./demoUsers";
 
 export const DEMO_SHOPPERS: User[] = [
-  {
-    id: "demo-shopper-1",
-    email: "nikolay@demo.ru",
-    password: "",
-    type: UserType.MYSTERY_SHOPPER,
-    token: "",
-    name: "Николай Васильевич",
-    details: { location: "Москва", birthDate: "1990-05-12" },
-  },
+  TEST_SHOPPER_USER,
   {
     id: "demo-shopper-2",
     email: "igor@demo.ru",
@@ -109,7 +101,7 @@ export const INITIAL_DEMO_CHATS: DemoChat[] = [
   {
     id: "demo-chat-1",
     offerId: "demo-offer-1",
-    mystery_shopper: "demo-shopper-1",
+    mystery_shopper: TEST_SHOPPER_USER.id,
     business: TEST_BUSINESS_USER.id,
   },
   {
@@ -132,7 +124,7 @@ export const INITIAL_DEMO_MESSAGES: DemoMessage[] = [
     chatId: "demo-chat-1",
     text: "Здравствуйте! Готов выполнить проверку аптеки на Тверской.",
     time: "10:12",
-    userId: "demo-shopper-1",
+    userId: TEST_SHOPPER_USER.id,
   },
   {
     id: "demo-msg-2",
@@ -146,7 +138,7 @@ export const INITIAL_DEMO_MESSAGES: DemoMessage[] = [
     chatId: "demo-chat-1",
     text: "Могу приехать завтра после 14:00. Нужен ли чек на покупку?",
     time: "10:22",
-    userId: "demo-shopper-1",
+    userId: TEST_SHOPPER_USER.id,
   },
   {
     id: "demo-msg-4",
@@ -188,11 +180,12 @@ export const INITIAL_DEMO_MESSAGES: DemoMessage[] = [
 export const getDemoShopperById = (id: string): User | undefined =>
   DEMO_SHOPPERS.find((shopper) => shopper.id === id);
 
-export const getDemoShopperStatus = (shopperId: string): string => {
+export const getDemoUserStatus = (userId: string): string => {
   const statuses: Record<string, string> = {
-    "demo-shopper-1": "online",
+    [TEST_SHOPPER_USER.id]: "online",
     "demo-shopper-2": "offline",
     "demo-shopper-3": "offline",
+    [TEST_BUSINESS_USER.id]: "online",
   };
-  return statuses[shopperId] ?? "offline";
+  return statuses[userId] ?? "offline";
 };

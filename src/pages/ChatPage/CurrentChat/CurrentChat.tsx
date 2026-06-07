@@ -30,8 +30,9 @@ const CurrentChat = memo(() => {
   const refreshChat = async () => {
     if (chatId) {
       try {
-        const response = await getMessages(chatId);
+        const response = await getMessages(chatId, user ?? undefined);
         const report = await getReportByChatId(chatId);
+        console.log(report);
         setChatData({ ...response?.data, report: report?.data?.[0] });
       } catch (e) {
         console.error(e);

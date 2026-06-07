@@ -78,6 +78,13 @@ export const DirectorContact = styled.span`
   line-height: 26px;
 `;
 
+export const LoginModalActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+`;
+
 export const Splitter = styled.div`
   display: flex;
   flex-direction: row;

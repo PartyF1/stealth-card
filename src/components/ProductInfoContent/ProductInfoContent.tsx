@@ -3,6 +3,7 @@ import mockupProfile from "../../assets/product-mockups/mockup-profile.png";
 import mockupChat from "../../assets/product-mockups/mockup-chat.png";
 import mockupReport from "../../assets/product-mockups/mockup-report.png";
 import mockupOffers from "../../assets/product-mockups/mockup-offers.png";
+import demoVideo from "../../assets/demo.mp4"
 import {
   Description,
   MockupImage,
@@ -77,6 +78,9 @@ export const ProductDetailsContent = () => (
           <MockupImage key={alt} src={src} alt={alt} />
         ))}
       </MockupsGrid>
+    </DefaultContent>
+    <DefaultContent title="ДЕМОНСТРАЦИЯ ПРОДУКТА">
+      <video src={demoVideo} controls/>
     </DefaultContent>
   </ScrollableMain>
 );

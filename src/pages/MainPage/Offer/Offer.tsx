@@ -10,6 +10,7 @@ import { ButtonContainer } from "../../RegistrationPage/ui/ButtonContainer/Butto
 import { Button, ButtonType } from "../../../shared/ui/Button";
 import { Dimension } from "../../../shared/types/enums";
 import { useUser } from "../../../app/providers/UserProvider/context";
+import { UserType } from "../../../shared/types/user";
 
 export const OfferPage = memo(() => {
   const { offerId } = useParams();
@@ -34,22 +35,22 @@ export const OfferPage = memo(() => {
   }, []);
 
   const handleCreateOrder = async () => {
-    if (offerId) {
-      let executorId, businessId;
-      if (offerData?.user.type === "business") {
-        executorId = user?.id;
-        businessId = offerData.user.id;
-      } else {
-        executorId = offerData?.user.id;
-        businessId = user?.id;
-      }
-      const response = await createOrder(offerId, executorId, businessId);
+    if (offerId && user?.id && offerData?.user.id) {
+      const response = await createOrder(
+        offerId,
+        user.id,
+        offerData.user.id
+      );
 
       if (response?.data) {
         navigate(`/orders/${response.data.id}`);
       }
     }
   };
+
+  const canRespond =
+    user?.type === UserType.MYSTERY_SHOPPER &&
+    offerData?.user.type === UserType.BUSINESS;
 
   return (
     <TemplatePage
@@ -59,14 +60,14 @@ export const OfferPage = memo(() => {
           <DefaultContent title={offerData?.name}>
             {offerData &&
               Object.values(offerData?.details).map((detail) => (
-                <InfoWrapper>
+                <InfoWrapper key={detail?.title}>
                   <InfoTitle>{detail?.title}</InfoTitle>
                   <InfoData>{detail?.value}</InfoData>
                 </InfoWrapper>
               ))}
           </DefaultContent>
         ),
-        footer: (
+        footer: canRespond ? (
           <ButtonContainer>
             <Button
               dimension={Dimension.NARROW}
@@ -76,6 +77,8 @@ export const OfferPage = memo(() => {
               ОТКЛИКНУТЬСЯ
             </Button>
           </ButtonContainer>
+        ) : (
+          <></>
         ),
       }}
     />

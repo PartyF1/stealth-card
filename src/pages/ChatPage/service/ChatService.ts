@@ -40,9 +40,9 @@ export const getOrders = async (user: User) => {
   return Promise.all(result);
 };
 
-export const getMessages = async (chatId: string) => {
+export const getMessages = async (chatId: string, user?: User) => {
   if (isDemoSession()) {
-    return { data: getDemoChatById(chatId) };
+    return { data: getDemoChatById(chatId, user) };
   }
 
   return await api.get(`/chats/${chatId}/?_embed=messages`);

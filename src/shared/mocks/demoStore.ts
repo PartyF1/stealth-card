@@ -1,9 +1,9 @@
 import type { User } from "../types/user";
 import { UserType } from "../types/user";
-import { TEST_BUSINESS_USER } from "./testBusinessUser";
+import { TEST_BUSINESS_USER } from "./demoUsers";
 import {
   getDemoShopperById,
-  getDemoShopperStatus,
+  getDemoUserStatus,
   INITIAL_DEMO_CHATS,
   INITIAL_DEMO_MESSAGES,
   INITIAL_DEMO_OFFERS,
@@ -11,64 +11,80 @@ import {
   type DemoMessage,
   type DemoOffer,
 } from "./demoData";
+import type { IReport } from "../types/report";
+import { REPORT_STEPS } from "../types/enums";
 
 let offers: DemoOffer[] = [...INITIAL_DEMO_OFFERS];
 let chats: DemoChat[] = [...INITIAL_DEMO_CHATS];
 let messages: DemoMessage[] = [...INITIAL_DEMO_MESSAGES];
+let reports: IReport[] = [];
 
 const nextId = (prefix: string) =>
   `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
-export const resetDemoStore = () => {
-  offers = [...INITIAL_DEMO_OFFERS];
-  chats = [...INITIAL_DEMO_CHATS];
-  messages = [...INITIAL_DEMO_MESSAGES];
-};
+// export const resetDemoStore = () => {
+//   offers = [...INITIAL_DEMO_OFFERS];
+// };
 
 export const getDemoOffers = (userType: string): DemoOffer[] => {
   if (userType === UserType.BUSINESS) {
     return offers.filter((offer) => offer.userId === TEST_BUSINESS_USER.id);
   }
 
-  return offers.filter((offer) => offer.user.type !== userType);
+  return offers.filter((offer) => offer.user.type === UserType.BUSINESS);
 };
 
 export const getDemoOfferById = (offerId: string): DemoOffer | undefined =>
   offers.find((offer) => offer.id === offerId);
 
-export const getDemoChats = (user: User) => {
-  const userChats = chats.filter((chat) => chat[user.type] === user.id);
+const getCounterpartUser = (chat: DemoChat, user: User): User => {
+  const counterpartId =
+    user.type === UserType.BUSINESS ? chat.mystery_shopper : chat.business;
 
-  return userChats.map((chat) => {
-    const counterpartId =
-      user.type === UserType.BUSINESS
-        ? chat.mystery_shopper
-        : chat.business;
-    const counterpart = getDemoShopperById(counterpartId) ?? {
+  if (counterpartId === TEST_BUSINESS_USER.id) {
+    return TEST_BUSINESS_USER;
+  }
+
+  return (
+    getDemoShopperById(counterpartId) ?? {
       id: counterpartId,
       name: "Участник",
-      type: UserType.MYSTERY_SHOPPER,
+      type:
+        user.type === UserType.BUSINESS
+          ? UserType.MYSTERY_SHOPPER
+          : UserType.BUSINESS,
       email: "",
       password: "",
       token: "",
       details: {},
-    };
+    }
+  );
+};
+
+export const getDemoChats = (user: User) => {
+  const userChats = chats.filter((chat) => chat[user.type] === user.id);
+
+  return userChats.map((chat) => {
+    const counterpart = getCounterpartUser(chat, user);
 
     return {
       ...chat,
       user: {
         ...counterpart,
-        status: getDemoShopperStatus(counterpartId),
+        status: getDemoUserStatus(counterpart.id),
       },
     };
   });
 };
 
-export const getDemoChatById = (chatId: string) => {
+export const getDemoChatById = (chatId: string, user?: User) => {
   const chat = chats.find((item) => item.id === chatId);
   if (!chat) return null;
 
-  const shopper = getDemoShopperById(chat.mystery_shopper);
+  const counterpart = user
+    ? getCounterpartUser(chat, user)
+    : getDemoShopperById(chat.mystery_shopper);
+
   const chatMessages = messages
     .filter((message) => message.chatId === chatId)
     .map(({ chatId: _, ...message }) => message);
@@ -77,8 +93,8 @@ export const getDemoChatById = (chatId: string) => {
     ...chat,
     messages: chatMessages,
     user: {
-      name: shopper?.name ?? "Тайный покупатель",
-      status: getDemoShopperStatus(chat.mystery_shopper),
+      name: counterpart?.name ?? "Участник",
+      status: getDemoUserStatus(counterpart?.id ?? ""),
     },
   };
 };
@@ -125,4 +141,17 @@ export const createDemoOffer = (
   };
   offers.push(offer);
   return offer;
+};
+
+export const createDemoReport = (
+  props: any
+) => {
+  console.log(props);
+  reports.push(props);
+  return props;
+};
+
+export const getDemoReportByChatId = (chatId: string) => {
+  console.log(reports);
+  return reports.find((report) => report.chatId === chatId);
 };
