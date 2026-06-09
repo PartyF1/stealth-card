@@ -4,6 +4,7 @@ import {
   ProductDetailsContent,
 } from "../../components/ProductInfoContent";
 import foundationLogo from "../../assets/foundation.svg";
+import mainProjectLogo from "../../assets/main_project-logo.svg";
 import { Button, ButtonType } from "../../shared/ui/Button";
 import { Modal } from "../../shared/ui/Modal";
 import { Dimension } from "../../shared/types/enums";
@@ -51,6 +52,7 @@ const WelcomePage = memo(() => {
           <LogoGroup>
             <ProjectLogo>STEALTHINSIDE</ProjectLogo>
             <FoundationLogo src={foundationLogo} alt="Фонд содействия инновациям" />
+            <FoundationLogo src={mainProjectLogo}/>
           </LogoGroup>
           <Button
             dimension={Dimension.NARROW}

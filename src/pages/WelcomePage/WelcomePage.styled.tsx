@@ -42,7 +42,7 @@ export const ProjectLogo = styled.span`
 
 export const FoundationLogo = styled.img`
   display: block;
-  max-height: 56px;
+  max-height: 72px;
   width: auto;
 `;
 
